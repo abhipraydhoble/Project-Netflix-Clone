@@ -1,10 +1,4 @@
-# Manual Steps
-
-TMDB API-KEY: 
-````
-020581a34f3ab93b1360a55bea864bd9
-````
-
+# Deploy Netflix Clone on Cloud using Jenkins - DevSecOps Project!
 <div align="center">
 
 
@@ -22,42 +16,7 @@ TMDB API-KEY:
 </div>
 
 
-
-# Deploy Netflix Clone on Cloud using Jenkins - DevSecOps Project!
-
-
-## Phase 1: Initial Setup and Deployment
-
-**Step 1: Launch EC2 (Ubuntu 22.04):**
-
-- Provision an EC2 instance on AWS with Ubuntu 22.04.
-- Connect to the instance using SSH.
-
-**Step 2: Clone the Code:**
-
-- Update all the packages and then clone the code.
-- Clone your application's code repository onto the EC2 instance:
-    
-    ```bash
-    git clone https://github.com/abhipraydhoble/netflix.git
-    ```
-    
-
-**Step 3: Install Docker and Run the App Using a Container:**
-
-- Set up Docker on the EC2 instance:
-    
-    ```bash
-    
-    sudo apt-get update
-    sudo apt-get install docker.io -y
-    sudo systemctl start docker
-    sudo usermod -aG docker ubuntu
-    newgrp docker
-    sudo chmod 777 /var/run/docker.sock
-    ```
-
-**Step 4: Get the API Key:**
+**Get the API Key:**
 
 - Open a web browser and navigate to TMDB (The Movie Database) website.
 - Click on "Login" and create an account.
@@ -69,52 +28,15 @@ TMDB API-KEY:
 
 ![image](https://github.com/user-attachments/assets/7deedb6b-6c33-483e-a9a7-5208752a3b44)
 
-Build and run your application using with your api key:
-```
-docker build --build-arg TMDB_V3_API_KEY=<your-api-key> -t netflix .
+TMDB API-KEY: 
 ````
-```
-docker run -d --name netflix -p 8081:80 netflix:latest
+020581a34f3ab93b1360a55bea864bd9
+````
 
-```
+**Launch EC2 (Ubuntu 22.04):**
 
-## Phase 2: Security
-
-1. **Install SonarQube and Trivy:**
-    - Install SonarQube and Trivy on the EC2 instance to scan for vulnerabilities.
-        
-        sonarqube
-        ```
-        docker run -d --name sonar -p 9000:9000 sonarqube:lts-community
-        ```
-        
-        
-        To access: 
-        
-        publicIP:9000 (by default username & password is admin)
-      
-        ![image](https://github.com/user-attachments/assets/5dd31956-48ee-4a35-a315-3cc91e2d1718)
-
-        To install Trivy:
-        ```
-        sudo apt-get install wget apt-transport-https gnupg lsb-release
-        wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | sudo apt-key add -
-        echo deb https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main | sudo tee -a /etc/apt/sources.list.d/trivy.list
-        sudo apt-get update
-        sudo apt-get install trivy        
-        ```
-        
-        to scan image using trivy
-        ```
-        trivy image <imageid>
-        ```
-        
-        
-2. **Integrate SonarQube and Configure:**
-    - Integrate SonarQube with your CI/CD pipeline.
-    - Configure SonarQube to analyze code for quality and security issues.
-
-# Automation
+- Provision an EC2 instance on AWS with Ubuntu 22.04.
+- Connect to the instance using SSH.
 
 ## Phase 3: CI/CD Setup
 
@@ -176,6 +98,57 @@ Goto Manage Jenkins → Tools → Install JDK(17) and NodeJs(16)→ Click on App
 ![image](https://github.com/user-attachments/assets/289c2e2a-df33-476b-a195-d584db3ef03e)
 
 
+**Install Docker and Run the App Using a Container:**
+
+- Set up Docker on the EC2 instance:
+    
+    ```bash
+    
+    sudo apt-get update
+    sudo apt-get install docker.io -y
+    sudo systemctl start docker
+    sudo usermod -aG docker ubuntu
+    sudo usermod -aG docker jenkins
+    newgrp docker
+    sudo chmod 777 /var/run/docker.sock
+    ```
+
+
+## Phase 2: Security
+
+1. **Install SonarQube and Trivy:**
+    - Install SonarQube and Trivy on the EC2 instance to scan for vulnerabilities.
+        
+        sonarqube
+        ```
+        docker run -d --name sonar -p 9000:9000 sonarqube:lts-community
+        ```
+        
+        
+        To access: 
+        
+        publicIP:9000 (by default username & password is admin)
+      
+        ![image](https://github.com/user-attachments/assets/5dd31956-48ee-4a35-a315-3cc91e2d1718)
+
+        To install Trivy:
+        ```
+        sudo apt-get install wget apt-transport-https gnupg lsb-release
+        wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | sudo apt-key add -
+        echo deb https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main | sudo tee -a /etc/apt/sources.list.d/trivy.list
+        sudo apt-get update
+        sudo apt-get install trivy        
+        ```
+        
+        to scan image using trivy
+        ```
+        trivy image <imageid>
+        ```
+        
+        
+2. **Integrate SonarQube and Configure:**
+    - Integrate SonarQube with your CI/CD pipeline.
+    - Configure SonarQube to analyze code for quality and security issues.
 
 
 
@@ -252,37 +225,6 @@ pipeline {
 }
 ```
 
-Certainly, here are the instructions without step numbers:
-
-**Install Dependency-Check and Docker Tools in Jenkins**
-
-**Install Dependency-Check Plugin:**
-
-- Go to "Dashboard" in your Jenkins web interface.
-- Navigate to "Manage Jenkins" → "Manage Plugins."
-- Click on the "Available" tab and search for "OWASP Dependency-Check."
-- Check the checkbox for "OWASP Dependency-Check" and click on the "Install without restart" button.
-
-**Configure Dependency-Check Tool:**
-
-- After installing the Dependency-Check plugin, you need to configure the tool.
-- Go to "Dashboard" → "Manage Jenkins" → "Global Tool Configuration."
-- Find the section for "OWASP Dependency-Check."
-- Add the tool's name, e.g., "DP-Check."
-- Save your settings.
-
-**Install Docker Tools and Docker Plugins:**
-
-- Go to "Dashboard" in your Jenkins web interface.
-- Navigate to "Manage Jenkins" → "Manage Plugins."
-- Click on the "Available" tab and search for "Docker."
-- Check the following Docker-related plugins:
-  - Docker
-  - Docker Commons
-  - Docker Pipeline
-  - Docker API
-  - docker-build-step
-- Click on the "Install without restart" button to install these plugins.
 
 **Add DockerHub Credentials:**
 
