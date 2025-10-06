@@ -30,7 +30,7 @@
 
 TMDB API-KEY: 
 ````
-020581a34f3ab93b1360a55bea864bd9
+eb3428e4a33e89ba1946e24fcb6cfede
 ````
 
 **Launch EC2 (Ubuntu 22.04):**
