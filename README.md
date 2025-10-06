@@ -316,11 +316,12 @@ pipeline{
 }
 
 
-If you get docker login failed errorr
-
-sudo su
-sudo usermod -aG docker jenkins
-sudo systemctl restart jenkins
+## Note: Docker Permisssion denied error
+````
+ sudo usermod -aG docker jenkins
+ newgrp docker
+ sudo chmod 777 /var/run/docker.sock
+````
 
 
 ```
