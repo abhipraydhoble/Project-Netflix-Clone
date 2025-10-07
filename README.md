@@ -323,9 +323,6 @@ pipeline{
  sudo chmod 777 /var/run/docker.sock
 ````
 
-
-```
-
 ## Phase 4: Monitoring
 
 1. **Install Prometheus and Grafana:**
