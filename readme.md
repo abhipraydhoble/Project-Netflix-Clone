@@ -130,7 +130,7 @@ Goto Manage Jenkins → Tools → Install JDK(17) and NodeJs(16)→ Click on App
 #### Docker
 ![image](https://github.com/user-attachments/assets/289c2e2a-df33-476b-a195-d584db3ef03e)
 
-<img width="1902" height="957" alt="image" src="https://github.com/user-attachments/assets/9f7d49da-fd8b-42cc-8dcc-b456bddd56a8" />
+
 
 ## Step8: Log in to Sonarqube and generate token
  - username: admin
