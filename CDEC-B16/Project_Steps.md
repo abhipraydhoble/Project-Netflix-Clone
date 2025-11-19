@@ -1,4 +1,38 @@
-# Project: Netflix App using CICD pipeline
+# Project: Netflix App (DevSecOps Project)
+
+<div align="center">
+
+
+  <br>
+  <a href="http://netflix-clone-with-tmdb-using-react-mui.vercel.app/">
+    <img src="./public/assets/netflix-logo.png" alt="Logo" width="100" height="32">
+  </a>
+</div>
+
+<br />
+
+<div align="center">
+  <img src="./public/assets/home-page.png" alt="Logo" width="100%" height="100%">
+  <p align="center">Home Page</p>
+</div>
+
+
+**Get the API Key:**
+
+- Open a web browser and navigate to TMDB (The Movie Database) website.
+- Click on "Login" and create an account.
+- Once logged in, go to your profile and select "Settings."
+- Click on "API" from the left-side panel.
+- Create a new API key by clicking "Create" and accepting the terms and conditions.
+- Provide the required basic details and click "Submit."
+- You will receive your TMDB API key.
+
+![image](https://github.com/user-attachments/assets/7deedb6b-6c33-483e-a9a7-5208752a3b44)
+
+TMDB API-KEY: 
+````
+020581a34f3ab93b1360a55bea864bd9
+````
 
 ## Step1: Launch EC2 instance
  - AMI: Ubuntu
@@ -79,7 +113,7 @@ stage view
 ## Step7: Install  Tools: Manage Jenkins->Tools
    - add jdk: "jdk17" ->install from adoptium.net->version- 17
    - add SonarQube Scanner: "sonar-scanner"
-   - add NodeJs: "node16" -> version 16
+   - add NodeJs: "node16" -> version 16.15.1
    - docker: "docker"
 
 ### **Configure Java and Nodejs in Global Tool Configuration**
@@ -94,13 +128,41 @@ Goto Manage Jenkins → Tools → Install JDK(17) and NodeJs(16)→ Click on App
 #### Docker
 ![image](https://github.com/user-attachments/assets/289c2e2a-df33-476b-a195-d584db3ef03e)
 
-## Step8: Configure Sonar Server: Manage Jenkins->System
+<img width="1902" height="957" alt="image" src="https://github.com/user-attachments/assets/9f7d49da-fd8b-42cc-8dcc-b456bddd56a8" />
+
+## Step8: Log in to Sonarqube and generate token
+ - username: admin
+ - password: admin
+<img width="1902" height="957" alt="image" src="https://github.com/user-attachments/assets/36620768-5f81-440c-b31b-ecf29c609f64" />
+
+## Step9: Add DockerHub & Sonarqube Credentials:
+   **Docker**
+  - Go to  "Manage Jenkins" → Credentials."
+  - Click on "Global."
+  - Click on "Add Credentials" 
+  - Choose "username with password" as the kind of credentials.
+  - Enter your DockerHub credentials (Username and Password) and give the credentials an ID (e.g., "docker-cred").
+  - Click "OK" to save your DockerHub credentials.
+    
+     **SonarQube**
+  - Go to  "Manage Jenkins" → Credentials."
+  - Click on "Global."
+  - Click on "Add Credentials" 
+  - Choose "secret text" as the kind of credentials.
+  - Enter your sonarqube token and give the credentials an ID (e.g., "sonar-token").
+  - Click "create" to save yourcredentials
+    
+<img width="1907" height="846" alt="image" src="https://github.com/user-attachments/assets/bcd447f5-4a49-478d-99d6-1379202f4334" />
+
+## Step10: Configure Sonar Server: Manage Jenkins->System
    - name: "sonar-server"
    - url:
    - token:
 ![image](https://github.com/user-attachments/assets/c5d05628-1502-4a92-b722-7ad3eed5d587)
 
-## Step9: Create Pipeline
+## Step 11: Restart Jenkins
+
+## Step12: Create Pipeline
 ````
 pipeline {
     agent any
@@ -174,5 +236,15 @@ Note:
    newgrp docker
    sudo chmod 777 /var/run/docker.sock
    ````
-   
 - Verify all the names before running pipeline
+  
+## Output:
+1. trivy output
+<img width="1657" height="917" alt="image" src="https://github.com/user-attachments/assets/bdae8864-ac9e-4d8a-8aa2-4558deb114ed" />
+2. sonarube ouput
+<img width="1916" height="915" alt="image" src="https://github.com/user-attachments/assets/df9e8a1e-f903-4be8-8d5a-97af04f16ca4" />
+3. netflix app
+<img width="1888" height="872" alt="image" src="https://github.com/user-attachments/assets/fe5fbe19-e62f-42c7-b3e7-9454bc1cec5b" />
+
+
+
