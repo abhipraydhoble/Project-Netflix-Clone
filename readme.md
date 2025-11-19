@@ -135,7 +135,7 @@ Goto Manage Jenkins → Tools → Install JDK(17) and NodeJs(16)→ Click on App
 ## Step8: Log in to Sonarqube and generate token
  - username: admin
  - password: admin
-
+<img width="1902" height="957" alt="image" src="https://github.com/user-attachments/assets/36620768-5f81-440c-b31b-ecf29c609f64" />   
 
 ## Step9: Add DockerHub & Sonarqube Credentials:
    **Docker**
@@ -153,7 +153,7 @@ Goto Manage Jenkins → Tools → Install JDK(17) and NodeJs(16)→ Click on App
   - Choose "secret text" as the kind of credentials.
   - Enter your sonarqube token and give the credentials an ID (e.g., "sonar-token").
   - Click "create" to save yourcredentials
-<img width="1902" height="957" alt="image" src="https://github.com/user-attachments/assets/36620768-5f81-440c-b31b-ecf29c609f64" />   
+
 <img width="1907" height="846" alt="image" src="https://github.com/user-attachments/assets/bcd447f5-4a49-478d-99d6-1379202f4334" />
 
 ## Step10: Configure Sonar Server: Manage Jenkins->System
