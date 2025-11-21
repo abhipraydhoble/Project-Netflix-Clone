@@ -163,6 +163,7 @@ Goto Manage Jenkins → Tools → Install JDK(17) and NodeJs(16)→ Click on App
 ![image](https://github.com/user-attachments/assets/c5d05628-1502-4a92-b722-7ad3eed5d587)
 
 ## Step 11: Restart Jenkins
+ADD "restart" web-page URL to RESTART the jenkins 
 
 ## Step12: Create Pipeline
 ````
